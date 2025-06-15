@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orinoco - Panier</title>
+    <link rel="stylesheet" href="panier.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="acceuil.html" class="logo">
+                <img src="logo.png" alt="Orinoco" height="40">
+            </a>
+            <nav>
+                <a href="acceuil.html" class="nav-link">Accueil</a>
+                <a href="panier.html" class="nav-link panier-link">🛒 Panier</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="cart-summary" id="cart-summary"></div>
+        <form class="order-form" id="order-form" autocomplete="off">
+            <div class="error-msg" id="form-error"></div>
+            <input name="firstName" placeholder="Prénom" required>
+            <input name="lastName" placeholder="Nom" required>
+            <input name="address" placeholder="Adresse" required>
+            <input name="city" placeholder="Ville" required>
+            <input name="email" type="email" placeholder="Email" required>
+            <button type="submit">Commander</button>
+        </form>
+    </main>
+    <script src="panier.js"></script>
+</body>
+</html>

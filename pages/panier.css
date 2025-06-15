@@ -1,0 +1,116 @@
+header {
+  background: #2d8cf0;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+}
+
+.logo img {
+  height: 40px;
+  vertical-align: middle;
+}
+
+nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #e0eaff;
+}
+
+.panier-link {
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+.cart-summary {
+  max-width: 700px;
+  margin: 40px auto 24px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 24px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item img {
+  width: 70px;
+  border-radius: 8px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-total {
+  text-align: right;
+  font-size: 1.2em;
+  margin-top: 18px;
+}
+
+/* Formulaire commande */
+.order-form {
+  max-width: 500px;
+  margin: 32px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 24px;
+}
+
+.order-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  border: 1px solid #b0c4de;
+  font-size: 1em;
+}
+
+.order-form button {
+  padding: 12px 32px;
+  background: #2d8cf0;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.order-form button:hover {
+  background: #1a5fa0;
+}
+
+.error-msg {
+  color: #c00;
+  margin-bottom: 10px;
+}

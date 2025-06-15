@@ -1,0 +1,70 @@
+1. Page liste produits
+    Lignes à tester :
+        Récupération des produits via l’API fetch
+        Affichage dynamique de la liste (boucle sur les produits)
+        Gestion des erreurs d’API (affichage d’un message)
+    Cas de test :
+        L’API retourne une liste de produits (affichage correct)
+        L’API retourne une liste vide (affichage d’un message)
+        L’API retourne une erreur (affichage d’un message d’erreur)
+
+
+2. Page produit
+    Lignes à tester :
+        Récupération d’un produit par son ID
+        Affichage des détails du produit
+        Affichage du menu déroulant de personnalisation
+        Ajout au panier (fonction appelée, données stockées)
+    Cas de test :
+        Produit trouvé (affichage correct)
+        Produit non trouvé (affichage d’un message d’erreur)
+        Sélection d’une option de personnalisation
+        Ajout au panier avec quantité correcte
+
+
+3. Page panier
+    Lignes à tester :
+        Lecture du panier depuis le stockage local
+        Affichage du résumé des produits
+        Calcul du prix total
+        Validation du formulaire de commande (tous les champs)
+        Envoi de la commande (appel API POST)
+    Cas de test :
+        Panier vide (affichage d’un message)
+        Panier avec plusieurs produits (affichage correct, calcul total)
+        Formulaire avec champs invalides (empêche l’envoi)
+        Formulaire avec champs valides (envoi réussi)
+        Réponse d’erreur du serveur (affichage d’un message)
+
+
+4. Page confirmation
+    Lignes à tester :
+        Lecture des informations de commande (prix total, order_id)
+        Affichage du message de remerciement
+    Cas de test :
+        Affichage correct avec données valides
+        Absence de données (affichage d’un message d’erreur)
+
+
+5. Validation des données
+    Lignes à tester :
+        Vérification des types et présence des champs dans l’objet contact
+        Vérification que le tableau des produits contient des strings
+    Cas de test :
+        Champs manquants ou mal typés (refus d’envoi)
+        Champs corrects (envoi accepté)
+
+
+6. Gestion des promesses
+    Lignes à tester :
+        Utilisation de .then/.catch ou async/await pour tous les appels API
+        Gestion des erreurs réseau ou serveur
+
+
+7. Couverture attendue
+    Les tests couvriront :
+        Les fonctions de récupération et d’affichage des données
+        Les fonctions de validation et d’envoi de formulaire
+        Les cas d’erreur et de succès pour chaque page
+        Les calculs (prix total, quantités)
+        Les interactions utilisateur (ajout au panier, validation formulaire)
