@@ -41,8 +41,8 @@ for (const api of apiBase) {
         </div>
       `;
 
-      document.querySelector('.add-to-cart').onclick = function() {
-        const option = document.querySelector('.option') ? document.querySelector('.option').value : null;
+      document.querySelector('#add-to-cart').onclick = function() {
+        const option = document.querySelector('#option') ? document.querySelector('#option').value : null;
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         cart.push({
           id: product._id,

@@ -1,5 +1,6 @@
 const uuid = require('uuid/v1');
 const Teddy = require('../models/Teddy');
+const orderValidation = require('../utils/validateOrder');
 
 exports.getAllTeddies = (req, res, next) => {
   Teddy.find().then(
@@ -47,15 +48,10 @@ exports.getOneTeddy = (req, res, next) => {
  *
  */
 exports.orderTeddies = (req, res, next) => {
-  if (!req.body.contact ||
-    !req.body.contact.firstName ||
-    !req.body.contact.lastName ||
-    !req.body.contact.address ||
-    !req.body.contact.city ||
-    !req.body.contact.email ||
-    !req.body.products) {
+  if (!orderValidation.isValidOrder(req.body)) {
     return res.status(400).send(new Error('Bad request!'));
   }
+  const contact = orderValidation.getContact(req.body.contact);
   let queries = [];
   for (let productId of req.body.products) {
     const queryPromise = new Promise((resolve, reject) => {
@@ -79,7 +75,7 @@ exports.orderTeddies = (req, res, next) => {
     (teddies) => {
       const orderId = uuid();
       return res.status(201).json({
-        contact: req.body.contact,
+        contact,
         products: teddies,
         orderId: orderId
       })

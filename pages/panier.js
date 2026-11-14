@@ -20,11 +20,13 @@ if (cart.length === 0) {
 
 document.getElementById('order-form').onsubmit = function(e) {
   e.preventDefault();
-  document.getElementById('form-error').textContent = "";
+  const formError = document.getElementById('form-error');
+  formError.textContent = "";
   if (cart.length === 0) {
-    document.getElementById('form-error').textContent = "Votre panier est vide.";
+    formError.textContent = "Votre panier est vide.";
     return;
   }
+
   const contact = {
     firstName: this.firstName.value.trim(),
     lastName: this.lastName.value.trim(),
@@ -32,27 +34,53 @@ document.getElementById('order-form').onsubmit = function(e) {
     city: this.city.value.trim(),
     email: this.email.value.trim()
   };
+  const contactFields = ['firstName', 'lastName', 'address', 'city', 'email'];
+  if (!contactFields.every(field => typeof contact[field] === 'string' && contact[field].length > 0)) {
+    formError.textContent = "Veuillez renseigner tous les champs du formulaire.";
+    return;
+  }
+
+  const products = cart.map(item => item && item.id);
+  if (!Array.isArray(products) || products.length === 0 ||
+      !products.every(productId => typeof productId === 'string' && productId.trim().length > 0)) {
+    formError.textContent = "Le panier contient un produit invalide.";
+    return;
+  }
+
   const category = cart[0].category;
+  if (!cart.every(item => item.category === category)) {
+    formError.textContent = "Une commande ne peut contenir que des produits d'une même catégorie.";
+    return;
+  }
+
   let apiUrl = "";
   if (category === "camera") apiUrl = "http://localhost:3000/api/cameras/order";
   else if (category === "furniture") apiUrl = "http://localhost:3000/api/furniture/order";
   else if (category === "teddy") apiUrl = "http://localhost:3000/api/teddies/order";
   else {
-    document.getElementById('form-error').textContent = "Catégorie inconnue.";
+    formError.textContent = "Catégorie inconnue.";
     return;
   }
-  const products = cart.map(item => item.id);
+
   fetch(apiUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ contact, products })
   })
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) {
+      throw new Error("Erreur lors de la commande.");
+    }
+    return res.json();
+  })
   .then(data => {
+    if (typeof data.orderId !== 'string' || !data.orderId) {
+      throw new Error("Réponse de commande invalide.");
+    }
     localStorage.removeItem('cart');
     window.location.href = `confirmation.html?orderId=${data.orderId}&total=${total.toFixed(2)}`;
   })
   .catch(() => {
-    document.getElementById('form-error').textContent = "Erreur lors de la commande.";
+    formError.textContent = "Erreur lors de la commande.";
   });
 };
